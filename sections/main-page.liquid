@@ -1,0 +1,448 @@
+<link rel="stylesheet" href="{{ 'section-main-page.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'section-main-page.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+
+<style>
+
+ .hidden {
+	 display: none;
+}
+ .button {
+	 width: 140px;
+	 cursor: pointer;
+	 padding: 1em;
+	 border-radius: 0.2em;
+	 border: none;
+	 color: white;
+	 font-weight: bold;
+	 font-size: 1em;
+	 transition: all 0.5s ease;
+	 background-color: #ff8552;
+}
+ .button:hover {
+	 background-color: #ff4f05;
+}
+ .button.disabled {
+	 opacity: 0.5;
+}
+ .button.disabled:hover {
+	 background-color: #ff8552;
+}
+ .form {
+	 margin-top: 5em;
+	 padding: 5em;
+	 padding-top: 2em;
+	 padding-bottom: 2em;
+	 background-color: white;
+	 font-family: "Raleway", sans-serif;
+	 color: #33312e;
+	 border-radius: 0.2em;
+	 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+ .form .progress-bar {
+	 width: 100%;
+	 list-style-type: none;
+	 display: flex;
+	 padding: 0;
+	 justify-content: center;
+	 margin-bottom: 3.5em;
+}
+ .form .progress-bar li.progress-bar__dot {
+	 display: block;
+	 width: 0.6em;
+	 border-radius: 1000em;
+	 height: 0.6em;
+	 border: 0.2em solid #ff8552;
+	 background-color: white;
+	 cursor: pointer;
+	 transition: all 0.5s ease;
+}
+ .form .progress-bar li.progress-bar__dot.full {
+	 background-color: #ff8552;
+}
+ .form .progress-bar li.progress-bar__connector {
+	 display: block;
+	 width: 5em;
+	 border-radius: 1000em;
+	 height: 0.1em;
+	 background-color: #ff8552;
+	 margin-top: 0.45em;
+}
+ .form label {
+	 font-weight: bold;
+	 font-size: 1.2em;
+}
+ .form input {
+	 width: 100%;
+	 padding: 1.3em;
+	 margin-bottom: 3em;
+	 box-sizing: border-box;
+	 margin-top: 1em;
+	 border: none;
+	 border-radius: 0.5em;
+	 background-color: #e6e6e6;
+	 font-size: 1em;
+	 font-family: "Raleway", sans-serif;
+}
+ .form input:focus {
+	 border: none;
+}
+ .form .button-group {
+	 width: 100%;
+	 display: flex;
+	 justify-content: space-between;
+	 margin-top: 50px;
+}
+ .form button#validate {
+	 margin: auto;
+	 background-color: #1a936f;
+	 width: 12em;
+}
+ .form button#validate:hover {
+	 background-color: #12684e;
+}
+ 
+.step {
+    display: flex;
+    place-content: space-between;
+}
+  .input-group {
+    display: inline-grid;
+}
+  button.active {
+    background: #85888c;
+}
+</style>
+ {% assign Product_handle = page.handle %}
+ {% assign productv_id = all_products[Product_handle].selected_or_first_available_variant.id  %}
+ product_id=={{ productv_id }}
+
+
+ <form id="stepByStepForm" class="form">
+   <ul class="progress-bar">
+      <li class="progress-bar__dot full"></li>
+      <li class="progress-bar__connector"></li>
+      <li class="progress-bar__dot"></li>
+<!--       <li class="progress-bar__connector"></li>
+      <li class="progress-bar__dot"></li> -->
+   </ul>
+
+   <div class="step step1" id='step1'>
+     <span>Choose Your Box</span>
+      <div class="input-group">
+        
+         <span class="snize-thumbnail"><img src="https://cdn.shopify.com/s/files/1/0221/1054/products/NABOFVISUALLotsLoveKissesUnpersonalised_large.jpg?v=1654682501" class="snize-item-image" style="max-width:70px;max-height:70px;" alt="" border="0"></span>
+         <label for="lastname">Lots Of Love & Kisses Gift Box</label> 
+        <button product_v_id="41263490793612">Add</button>
+      </div>
+      <div class="input-group">
+        
+        <span class="snize-thumbnail"><img src="https://cdn.shopify.com/s/files/1/0221/1054/products/NABOFVISUALJustforYouUnpersonalised_large.jpg?v=1654682222" class="snize-item-image" style="max-width:70px;max-height:70px;" alt="" border="0"></span>
+         <label for="lastname">Just For You Gift Box</label>   
+        <button product_v_id="41263523430540">Add</button>
+      </div>
+   </div>
+
+   <div class="step step2 hidden" id='step2'>
+      <span>Choose Your Gifts</span>
+      <div class="input-group">
+      
+        <span class="snize-thumbnail">
+          <img src="https://cdn.shopify.com/s/files/1/0221/1054/products/RedFoiledChocolateHeart_large.png?v=1611138007" class="snize-item-image" style="max-width:70px;max-height:70px;" alt="" border="0">
+        </span>
+         <label for="lastname">Red Foiled Chocolate Hearts</label>
+       <button product_v_id="41263563899020">Add</button>
+      </div>
+   </div>
+
+<!--    <div class="step step3 hidden">
+      <div class="input-group">
+         <label for="lastname">Product 3</label>
+      </div>
+   </div> -->
+
+   <div class="button-group">
+      <button id="previous" class="disabled button" disabled>
+         previous
+      </button>
+      <button id="next" class="disabled button" disabled>
+         next
+      </button>
+   </div>
+   <div class="button-group">
+      <button id="validate" type="submit" class="hidden button">
+         Submit
+   </button>
+   </div>
+
+</form>
+
+<script>
+const previousButton = document.getElementById("previous")
+const nextButton = document.getElementById("next")
+const submitButton = document.getElementById('validate')
+const form = document.getElementById('stepByStepForm')
+const dots = document.getElementsByClassName('progress-bar__dot')
+const numberOfSteps = 2
+let currentStep = 1
+
+for(let i = 0 ; i < dots.length ; ++i){
+   dots[i].addEventListener('click', ()=>{
+     console.log(i+1)
+     goToStep(i+1) 
+   })
+}
+
+previousButton.onclick = goPrevious
+nextButton.onclick = goNext
+
+
+function goNext(e) {
+   e.preventDefault()
+   currentStep += 1
+   goToStep(currentStep)
+}
+
+function goPrevious(e) {
+   e.preventDefault()
+   currentStep -= 1
+   goToStep(currentStep)
+}
+
+function goToStep(stepNumber){   
+   currentStep = stepNumber
+   
+   let inputsToHide = document.getElementsByClassName('step')
+   let inputs = document.getElementsByClassName(`step${currentStep}`)
+   let indicators = document.getElementsByClassName('progress-bar__dot')
+   
+   for(let i = indicators.length-1; i >= currentStep ; --i){
+      indicators[i].classList.remove('full')
+   }
+   
+   for(let i = 0; i < currentStep; ++i){
+      indicators[i].classList.add('full')
+   }
+   
+   //hide all input
+   for (let i = 0; i < inputsToHide.length; ++i) {
+      hide(inputsToHide[i])
+   }
+   
+   //only show the right one
+   for (let i = 0; i < inputs.length; ++i) {
+      show(inputs[i])
+   }
+   
+   //if we reached final step
+   if(currentStep === numberOfSteps){
+      enable(previousButton)
+      disable(nextButton)
+      show(submitButton)
+   }
+   
+   //else if first step
+   else if(currentStep === 1){
+     disable(previousButton)
+      enable(next)
+      hide(submitButton)
+   }
+   
+   else {
+      enable(previousButton)
+      enable(next)
+      hide(submitButton)
+   }
+}
+
+function enable(elem) {
+   elem.classList.remove("disabled");
+   elem.disabled = false;
+}
+
+function disable(elem) {
+   elem.classList.add("disabled");
+   elem.disabled = true;
+}
+
+function show(elem){
+   elem.classList.remove('hidden')
+}
+
+function hide(elem){
+   elem.classList.add('hidden')
+}
+
+var data =[];
+var flag=false;
+$('[product_v_id]').on('click',function(e){
+    e.preventDefault();
+    if($(this).hasClass('active')){
+      $(this).removeClass('active');
+    }else{
+      $(this).addClass('active');
+    }
+    
+  var class_name   = $(this).closest('.step').attr('id');
+  
+  if($(`.${class_name}`).find('[product_v_id].active').length == 0){
+       console.log('tahrid')
+      if(class_name != 'step2'){
+         $('#next').addClass('disabled')
+         $('#next').attr('disabled','disabled')
+      }
+       
+    }else if($(`.${class_name}`).find('[product_v_id].active').length > 1 ){
+    if(class_name != 'step2'){
+       $('#next').addClass('disabled')
+       $('#next').attr('disabled','disabled')
+       }
+      
+    }else{
+    if(class_name != 'step2'){
+       $('#next').removeClass('disabled')
+       $('#next').removeAttr('disabled');
+      }
+        var product_v_id = $(`.${class_name}`).find('[product_v_id].active').attr('product_v_id');
+        var product_lastname = $(`.${class_name}`).find('[product_v_id].active').prev('[for="lastname"]').text();
+        var arrayValue = new Object();
+        arrayValue['step']={};
+        arrayValue['step']  = class_name+'/'+product_v_id+'/'+product_lastname; 
+        falg=false;
+        data.forEach(function(value, index){
+            //console.log(value.step);
+              if(value.step.includes(class_name)){
+               falg=true;
+                 value.step = class_name+'/'+product_v_id+'/'+product_lastname;
+              }
+        }); 
+        if(falg == false){
+          data.push(arrayValue); 
+        }
+        console.log(falg);
+        console.log(data);
+        return false;
+    }
+    
+    
+  
+    
+
+
+});
+   
+
+$(document).on('click','#validate',function(e){
+    e.preventDefault();
+    var DateWithProperties = [];
+    var Properties = [];
+    var items = [];
+   
+    data.forEach(function(value,index){
+      const step = data[index].step;
+      const last = step.split('/').pop();
+      const v_id = step.split('/')[1];
+      //console.log(v_id);
+      //DateWithProperties[v_id]=last;
+      DateWithProperties.push(v_id);
+      
+      Properties.push(last);
+        
+    });
+  var property = Properties.join(" : ");
+ 
+
+  console.log(DateWithProperties);
+  
+ 
+   DateWithProperties.forEach(function(value,index){
+     var jsonData = {};
+     
+     jsonData['id'] = value;
+     jsonData['quantity'] = 1;
+     jsonData['properties']={};
+     jsonData['properties']['Product_name'] = property;
+    items.push(jsonData);
+    });
+    console.log(items);
+
+    let formData = {items}
+    fetch(window.Shopify.routes.root + 'cart/add.js', {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+    })
+    .then(response => {
+      //return response.json();
+      if(response.status==200){
+        window.location.href = '/cart';
+      }
+    })
+    .catch((error) => {
+    console.error('Error:', error);
+    });
+})      
+
+    
+</script>
+<div class="page-width page-width--narrow section-{{ section.id }}-padding">
+  <h1 class="main-page-title page-title h0">
+    {{ page.title | escape }}
+  </h1>
+  <div class="rte">
+    {{ page.content }}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-page.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ]
+}
+{% endschema %}

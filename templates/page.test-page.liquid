@@ -1,0 +1,100 @@
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<div class="row" style="margin-left: auto; margin-right: auto; padding-top: 50px">
+  <div class="col-3">
+    <span>Operating system</span>
+    <select data-child="niv1" class="selectdata form-control custom-select">
+      <option value="1-1">Android</option>
+      <option value="1-2">Linux</option>
+      <option value="1-3" selected>Windows</option>
+    </select>
+  </div>
+  <div class="col-3">
+    <span>System version</span>
+    <select id="niv1" data-child="niv2" class="selectdata form-control custom-select">
+      <option data-group="1-1" value="1-1-1">9.0 Pie</option>
+
+      <option data-group="1-2" value="1-2-1">Ubuntu</option>
+
+      <option data-group="1-3" value="1-3-1">Windows 7</option>
+      <option data-group="1-3" value="1-3-2">Windows 8</option>
+      <option data-group="1-3" value="1-3-3">Windows 10</option>
+    </select>
+  </div>
+  <div class="col-3">
+    <span>Edition</span>
+    <select id="niv2" data-child="niv3" class="selectdata form-control custom-select">
+      <option data-group="1-2-1" value="1-2-1-1">Trusty Tahr</option>
+      <option data-group="1-2-1" value="1-2-1-2">Xenial Xerus</option>
+      <option data-group="1-2-1" value="1-2-1-3">Bionic Beaver</option>
+
+      <option data-group="1-3-1" value="1-3-1-1">Windows 7 Home</option>
+      <option data-group="1-3-1" value="1-3-1-2">Windows 7 Pro</option>
+
+      <option data-group="1-3-2" value="1-3-2-1">Windows 8 Home</option>
+      <option data-group="1-3-2" value="1-3-2-2">Windows 8 Pro</option>
+
+      <option data-group="1-3-3" value="1-3-3-1">Windows 10 Home</option>
+      <option data-group="1-3-3" value="1-3-3-2">Windows 10 Pro</option>
+    </select>
+  </div>
+  <div class="col-3">
+    <span>Build</span>
+    <select id="niv3" data-child="niv4" class="selectdata form-control custom-select">
+      <option data-group="1-2-1-2" value="1-2-1-2-1">18.04 LTS</option>
+
+      <option data-group="1-3-1-1" value="1-3-1-1-1">Win 7 Home - A</option>
+      <option data-group="1-3-1-1" value="1-3-1-1-2">Win 7 Home - B</option>
+
+      <option data-group="1-3-1-2" value="1-3-1-2-1">Win 7 Pro - A</option>
+      <option data-group="1-3-1-2" value="1-3-1-2-2">Win 7 Pro - B</option>
+
+      <option data-group="1-3-2-1" value="1-3-2-1-1">Win 8 Home - A</option>
+      <option data-group="1-3-2-1" value="1-3-2-1-2">Win 8 Home - B</option>
+
+      <option data-group="1-3-2-2" value="1-3-2-2-1">Win 8 Pro - A</option>
+      <option data-group="1-3-2-2" value="1-3-2-2-2">Win 8 Pro - B</option>
+
+      <option data-group="1-3-3-1" value="1-3-3-1-1">Win 10 Home - A</option>
+      <option data-group="1-3-3-1" value="1-3-3-1-2">Win 1 Home - B</option>
+
+      <option data-group="1-3-3-2" value="1-3-3-2-1">Win 10 Pro - A</option>
+      <option data-group="1-3-3-2" value="1-3-3-2-2">Win 10 Pro - B</option>
+    </select>
+  </div>
+</div>
+
+
+<script>
+  $("[data-child]").change(function () {
+  const selectedGroup = $(this).val();
+    console.log(selectedGroup)
+  if (selectedGroup == null) {
+    
+    $("#" + $(this).attr("id")).hide();
+  } else {
+    
+    $("#" + $(this).attr("id")).show();
+  }
+    // return false;
+  var $childSelect = $("#" + $(this).attr("data-child"));
+  value = $childSelect
+    .find("option")
+    .hide()
+    .filter(function (i, e) {
+      return $(e).val().startsWith(selectedGroup);
+    })
+    .show()
+    .eq(0)
+    .val();
+  $childSelect.val(value);
+  $childSelect.trigger("change");
+   // console.log(selectedGroup)
+    //console.log('id :'+$(this).attr("id"))
+
+});
+//$("[data-child]").eq(0).trigger("change");
+
+</script>

@@ -1,0 +1,37 @@
+{% assign em_owner_id = shop.metafields['engagemessage'].em_owner_id %}
+{% if customer %}
+    {% assign em_api_secret = shop.metafields['engagemessage'].em_api_secret %}
+    {% assign em_customer_email = customer.email %}
+    {% assign em_customer_id = customer.id %}
+    {% assign em_customer_first_name = customer.first_name %}
+    {% assign em_customer_last_name = customer.last_name %}
+    {% assign em_customer_tags = customer.tags | join: "," %}
+    {% assign em_customer_orders_count = customer.orders_count %}
+    {% assign em_customer_accepts_marketing = customer.accepts_marketing %}
+    {% assign em_customer_total_spent = customer.total_spent %}
+    {% assign em_digest = em_owner_id
+        | append: em_customer_email
+        | append: em_customer_id
+        | append: em_customer_first_name
+        | append: em_customer_last_name
+        | append: em_customer_tags
+        | append: em_customer_orders_count
+        | append: em_customer_accepts_marketing
+        | append: em_customer_total_spent
+        | hmac_sha256: em_api_secret %}
+{% endif %}
+
+<div class="em-rewards-init"
+    data-owner-id="{{ em_owner_id }}"
+{% if customer %}
+    data-customer-email="{{ em_customer_email | escape }}"
+    data-customer-id="{{ em_customer_id | escape }}"
+    data-customer-first-name="{{ em_customer_first_name | escape }}"
+    data-customer-last-name="{{ em_customer_last_name | escape }}"
+    data-customer-tags="{{ em_customer_tags | escape }}"
+    data-customer-orders-count="{{ em_customer_orders_count | escape }}"
+    data-customer-accepts-marketing="{{ em_customer_accepts_marketing | escape }}"
+    data-customer-total-spent="{{ em_customer_total_spent | escape }}"
+    data-digest="{{ em_digest }}"
+{% endif %}
+></div>
