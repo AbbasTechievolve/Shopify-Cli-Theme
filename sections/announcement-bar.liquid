@@ -1,14 +1,5 @@
 Only_adds  
-<div style="background-color: #4CAF50; color: white; text-align: center; padding: 15px 0; font-family: Arial, sans-serif; border: 2px solid #388E3C; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);">
-    <span style="background-color: #388E3C; padding: 5px 10px; border-radius: 5px;"><strong>This Product Is On Weekend Sale</strong></span><br><br>
-    <span style="font-weight: bold; color: yellow;">15% Discount</span> on All GHC Products<br>
-    Coupon applies automatically at checkout<br><br>
-    <a href="https://greenherbalcare.com/collections/ghc-products" style="text-decoration: none;">
-        <button style="background-color: yellow; color: black; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; margin: 4px 2px; cursor: pointer; border-radius: 12px; font-size: 16px;">
-            Checkout All GHC Products
-        </button>
-    </a>
-</div>
+
 {% include 'countdown-timer', title: "Special Offer End In", start_date:section.settings.Start_Discount_Time , end_date: section.settings.End_Discount_Time %} 
 {%- for block in section.blocks -%}
   {%- case block.type -%}
